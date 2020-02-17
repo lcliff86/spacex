@@ -1,16 +1,15 @@
 import React from 'react';
+import Header from './components/Header';
+import Picture from './components/Picture';
 import './style/index.scss';
 
 function App() {
     return (
         <div>
-            <header>
-                <a href="/" title="Spacex Launches" class="logo">Spacex Launches</a>
-                <button>Reload Data</button>
-            </header>
+            <Header/>
             <main>
                 <aside>
-                    <picture></picture>
+                    <Picture/>
                 </aside>
                 <article>
                     <form>
