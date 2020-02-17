@@ -1,32 +1,25 @@
 import React from 'react';
-import logo from '../assets/spacex-logo.png';
 
 class List extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			launches: [],
-			filteredYear: '',
-			ascending: true
-		}
+			launches: this.props.settings.launches,
+			filteredLaunches: this.props.settings.launches,
+			years: [],
+			filteredYear: this.props.settings.filteredYear,
+			filterOpen: this.props.settings.filterOpen,
+			ascending: this.props.settings.ascending,
+			isLoading: this.props.settings.isLoading,
+			error: this.props.settings.error,
+			reload: false
+		}			
 
-		this.handleToggle = this.handleToggle.bind(this);
-	}
-
-	getLaunches() {
-		fetch('https://api.spacexdata.com/v3/launches')
-		.then(res => res.json())
-		.then((data) => {
-			this.setState({ launches: data })
-			console.log(this.state.launches)
-		})
-		.catch(console.log)
-	}
-
-	componentDidMount() {
-		// get list here from API
-		this.getLaunches();
+		this.handleASCToggle = this.handleASCToggle.bind(this);
+		this.handleFilterToggle = this.handleFilterToggle.bind(this);
+		this.handleYearSelect = this.handleYearSelect.bind(this);
+		this.handleYearReset = this.handleYearReset.bind(this);
 	}
 
 	nth(d) {
@@ -40,7 +33,7 @@ class List extends React.Component {
 	}
 
 	formatDate(date) {
-		// 24th Mar 2006
+		// desired format - 24th Mar 2006
 		const monthNames = [
 			"Jan", "Feb", "Mar",
 			"Apr", "May", "Jun", "Jul",
@@ -52,28 +45,88 @@ class List extends React.Component {
 		var monthIndex = newDate.getMonth();
 		var year = newDate.getFullYear();
 
+		// now build up format to return
 		return day + this.nth(day) + ' ' + monthNames[monthIndex] + ' ' + year;
-		
-		//return newDate;
 	}
 
-	handleToggle() {
+	handleASCToggle(e) {
+		e.preventDefault();
+
 		this.setState(state => ({
-	    	ascending: !state.ascending
+	    	ascending: !state.ascending,
+	    	filteredLaunches: state.filteredLaunches.reverse()
 	    }));
 	}
 
+	handleFilterToggle(e) {
+		e.preventDefault();
+
+		this.setState(state => ({
+			filterOpen: !state.filterOpen
+		}));
+	}
+
+	handleYearSelect(year, e) {
+		this.setState(state => ({
+			filteredYear: year,
+			filterOpen: !state.filterOpen,
+			filteredLaunches: state.launches.filter(launch => launch.launch_year === year)
+		}));
+	}
+
+	handleYearReset() {
+		this.setState(state => ({
+			filteredYear: '',
+			filterOpen: !state.filterOpen,
+			filteredLaunches: state.launches
+		}));
+	}
+
+	static getDerivedStateFromProps(props, state) {
+		// trigger a reset if reload is called or new launches doesn't equal current list
+		if (props.settings.reload || props.settings.launches.length !== state.launches.length) {
+			return {
+			    launches: props.settings.launches,
+			    filteredLaunches: props.settings.launches,
+			    years: Array.from(new Set(props.settings.launches.map(launch => launch.launch_year))), // get all the unique years,
+                filteredYear: '',
+                filterOpen: false,
+                ascending: true
+			};
+		}
+		
+		return null;
+	}
+
 	render() {
+		const { isLoading, error, years, filteredLaunches, filteredYear, filterOpen, ascending } = this.state;
+
 		return (
 			<div>
 				<form>
 					<div data-filter-year>
-						<button>{this.state.filteredYear ? this.state.filteredYear : 'Filter by Year'}</button>
+						<button onClick={this.handleFilterToggle} className={filterOpen ? 'open' : ''}>
+							{filteredYear ? filteredYear : 'Filter by Year'}
+						</button>
+						<div data-filter-dropdown>
+							<div data-filter-option onClick={this.handleYearReset}>Reset Filter</div>
+							{years.map((year) => (
+								<div data-filter-option key={year} onClick={(e) => this.handleYearSelect(year)}>{year}</div>
+							))}
+						</div>
 					</div>
-					<button data-sort onClick={this.handleToggle}>Sort {this.state.ascending ? 'Descending' : 'Ascending'}</button>
+					<button data-sort onClick={this.handleASCToggle}>Sort {ascending ? 'Descending' : 'Ascending'}</button>
 				</form>
 				<div className="launches">
-				{this.state.launches.map((launch, index) => (
+				{isLoading &&
+					<p>Loading...</p>
+				}
+
+				{error &&
+					<p>There was an error, please try again.</p>
+				}
+
+				{filteredLaunches.map((launch) => (
 					<div className="launch" key={launch.flight_number}>
 						<span className="number">#{launch.flight_number}</span>
 						<span className="name">{launch.mission_name}</span>

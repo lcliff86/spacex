@@ -56,8 +56,74 @@ form {
 	}
 
 	[data-filter-year] {
+		position: relative;
+
 		button {
 			margin-right: 10px;
+			min-width: 125px;
+			text-align: left;
+
+			&:hover,
+			&:focus {
+				&::after {
+					transform: none;
+				}
+			}
+
+			&.open {
+				&::after {
+					transform: rotate(180deg);
+				}
+			}
+
+			@media (min-width: $mobile) {
+				min-width: 155px;
+			}
+		}
+
+		[data-filter-dropdown] {
+			display: none;
+			position: absolute;
+			top: 42px;
+			left: 0;
+			right: 0;
+			max-height: 200px;
+			overflow-y: scroll;
+
+			@media (min-width: $mobile) {
+				max-height: 300px;
+			}
+
+			@media (min-width: $desktop) {
+				max-height: none;
+				overflow: unset;
+			}
+
+			[data-filter-option] {
+				background-color: $primary-blue;
+				border-bottom: 1px solid $white-color;
+				color: $white-color;
+				cursor: pointer;
+				padding: 10px 10px 10px 17px;
+				width: calc(100% - 10px);
+
+				&:first-child {
+					border-top: 1px solid $white-color;
+				}
+
+				&:last-child {
+					border-bottom: none;
+				}
+
+				&:hover,
+				&:focus {
+					background-color: $font-color;
+				}
+			}
+		}
+
+		.open + [data-filter-dropdown] {
+			display: block;
 		}
 	}
 }

@@ -13,7 +13,7 @@ class Header extends React.Component {
 		            >
 		                <img src={logo} alt="Spacex"/> <span>Launches</span>
 		            </a>
-		            <button>Reload Data</button>
+		            <button onClick={this.props.action}>Reload Data</button>
 	            </div>
 	        </header>
 	    )
