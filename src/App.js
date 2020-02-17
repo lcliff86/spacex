@@ -58,7 +58,7 @@ class App extends React.Component {
         return (
             <div>
                 <Header className="container" action={this.getLaunches}/>
-                <main className="container">
+                <main className={"container " + (this.state.isLoading ? '' : 'show')}>
                     <aside>
                         <Picture/>
                     </aside>

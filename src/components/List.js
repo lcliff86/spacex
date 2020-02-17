@@ -7,13 +7,12 @@ class List extends React.Component {
 		this.state = {
 			launches: this.props.settings.launches,
 			filteredLaunches: this.props.settings.launches,
-			years: [],
+			years: Array.from(new Set(this.props.settings.launches.map(launch => launch.launch_year))),
 			filteredYear: this.props.settings.filteredYear,
 			filterOpen: this.props.settings.filterOpen,
 			ascending: this.props.settings.ascending,
 			isLoading: this.props.settings.isLoading,
-			error: this.props.settings.error,
-			reload: false
+			error: this.props.settings.error
 		}			
 
 		this.handleASCToggle = this.handleASCToggle.bind(this);
@@ -23,6 +22,7 @@ class List extends React.Component {
 	}
 
 	nth(d) {
+		// adds the ordinals to dates
 		if (d > 3 && d < 21) return 'th';
 			switch (d % 10) {
 			case 1:  return "st";
