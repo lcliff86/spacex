@@ -5,14 +5,16 @@ class Header extends React.Component {
 	render() {
 		return (
 			<header>
-	            <a 
-	                href="/"
-	                title="Spacex Launches Homepage"
-	                className="logo"
-	            >
-	                <img src={logo} alt="Spacex Launches"/>
-	            </a>
-	            <button>Reload Data</button>
+				<div className="container">
+		            <a 
+		                href="/"
+		                title="Spacex Launches Homepage"
+		                className="logo"
+		            >
+		                <img src={logo} alt="Spacex"/> <span>Launches</span>
+		            </a>
+		            <button>Reload Data</button>
+	            </div>
 	        </header>
 	    )
 	}

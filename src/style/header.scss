@@ -1,0 +1,49 @@
+header {
+	min-height: 66px;
+	padding-top: 24px;
+	position: relative;
+
+	.logo {
+		color: $font-color;
+		font-size: 1.2rem;
+		margin-top: 10px;
+		position: relative;
+		text-decoration: none;
+		text-transform: uppercase;
+
+		img {
+			float: left;
+			height: auto;
+			max-width: 276px;
+		}
+
+		span {
+			position: absolute;
+			right: -80px;
+			top: 14px;
+		}
+	}
+
+	button {
+		background-color: $primary-blue;
+		border-radius: 22px 0 0 22px;
+		color: $white-color;
+		line-height: 43px;
+		padding: 0 42px 0 18px;
+		position: absolute;
+		right: 0;
+		top: 24px;
+
+		&::after {
+			background-image: url(./../assets/icon/refresh@3x.png);
+			background-size: 15px;
+			content: '';
+			height: 15px;
+			position: absolute;
+			right: 16px;
+			top: calc(50% - 8px);
+			transition: transform 0.6s;
+			width: 15px;
+		}
+	}
+}

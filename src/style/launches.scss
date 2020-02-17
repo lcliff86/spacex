@@ -1,0 +1,51 @@
+.launches {
+	padding-bottom: 50px;
+
+	.launch {
+		border-radius: 5px;
+		box-shadow: 0 3px 5px 0 #a5a5a5;
+		clear: both;
+		margin-bottom: 8px;
+		min-height: 80px;
+		padding: 0 16px 0 34px;
+		width: 100%;
+
+		.number,
+		.name {
+			line-height: 80px;
+		}
+
+		.number {
+			display: inline-block;
+			font-size: 1.875rem;
+			font-weight: bold;
+			width: 94px;
+		}
+
+		.name {
+			font-size: 1.5rem;
+			font-weight: bold;
+		}
+
+		.details {
+			float: right;
+			text-align: right;
+
+			.date,
+			.rocket {
+				display: block;
+			}
+
+			.date {
+				font-size: 0.8125rem;
+				margin-bottom: 10px;
+				padding-top: 12px;
+			}
+
+			.rocket {
+				font-size: 1.1875rem;
+				font-weight: 900;
+			}
+		}
+	}
+}
