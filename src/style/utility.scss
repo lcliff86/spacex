@@ -7,7 +7,7 @@ button {
 	background-color: $primary-blue;
 	color: $white-color;
 	cursor: pointer;
-	font-size: 1rem;
+	font-size: 0.8rem;
 
 	&::after {
 		transition: transform 0.6s;
@@ -21,28 +21,59 @@ button {
 			transform: rotate(180deg);
 		}
 	}
+
+	@media (min-width: $tablet) {
+		font-size: 1rem;
+	}
 }
 
 .container {
 	margin: 0 auto;
-	max-width: 1320px;
+	overflow: hidden;
+
+	@media (min-width: $tablet) {
+		max-width: $desktop;
+	}
+	
 }
 
 main {
 	clear: both;
 	padding-top: 53px;
+
+	@media (min-width: $tablet) {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
 }
 
 article,
 aside {
-	float: left;
+	padding: 0 15px;
+
+	@media (min-width: $tablet) {
+		margin: 0 auto;
+		padding: 0;
+	}
+
+	@media (min-width: $desktop) {
+		float: left;
+	}
 }
 
 article {
-	min-width: 730px;
+	@media (min-width: $tablet) {
+		min-width: 730px;
+	}
+	
 }
 
 aside {
-	max-width: 535px;
-	padding-top: 82px;
+	overflow: hidden;
+	padding: 25px 0;
+
+	@media (min-width: $tablet) {
+		max-width: 535px;
+		padding-top: 82px;
+	}
 }

@@ -1,6 +1,6 @@
 header {
 	min-height: 66px;
-	padding-top: 24px;
+	padding: 24px 15px 0;
 	position: relative;
 
 	.logo {
@@ -14,13 +14,23 @@ header {
 		img {
 			float: left;
 			height: auto;
-			max-width: 276px;
+			max-width: 190px;
 		}
 
 		span {
 			position: absolute;
 			right: -80px;
-			top: 14px;
+			top: 3px;
+		}
+
+		@media (min-width: $tablet) {
+			img {
+				max-width: 276px;
+			}
+			
+			span {
+				top: 14px;
+			}
 		}
 	}
 
@@ -32,7 +42,11 @@ header {
 		padding: 0 42px 0 18px;
 		position: absolute;
 		right: 0;
-		top: 24px;
+		top: 85px;
+
+		@media (min-width: $tablet) {
+			top: 24px;
+		}
 
 		&::after {
 			background-image: url(./../assets/icon/refresh@3x.png);

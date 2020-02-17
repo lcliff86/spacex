@@ -2,10 +2,14 @@ form {
 	float: right;
 	margin-bottom: 10px;
 
-	button {
-		margin-left: 10px;
-		padding: 12px 43px 12px 18px;
+	button {		
+		padding: 12px 40px 12px 7px;
 		position: relative;
+
+		@media (min-width: $tablet) {
+			padding-left: 18px;
+			padding-right: 43px;
+		}
 
 		&::after {
 			background-image: url(./../assets/icon/select@3x.png);
@@ -14,22 +18,34 @@ form {
 			content: '';
 			height: 8px;
 			position: absolute;
-			right: 18px;
+			right: 15px;
 			top: calc(50% - 4px);
 			width: 12px;
+
+			@media (min-width: $tablet) {
+				right: 18px;
+			}
 		}
 
 		&[data-sort] {
-			min-width: 172px;
+			min-width: 136px;
 			padding-right: 35px;
 
 			&::after {
 				background-image: url(./../assets/icon/sort@3x.png);
 				background-size: 14px 20px;
 				height: 20px;
-				right: 13px;
+				right: 10px;
 				top: calc(50% - 10px);
 				width: 14px;
+			}
+
+			@media (min-width: $tablet) {
+				min-width: 172px;
+
+				&::after {
+					right: 13px;
+				}
 			}
 		}
 	}
@@ -37,5 +53,11 @@ form {
 	[data-filter-year],
 	[data-sort] {
 		float: left;
+	}
+
+	[data-filter-year] {
+		button {
+			margin-right: 10px;
+		}
 	}
 }

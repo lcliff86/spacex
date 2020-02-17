@@ -1,9 +1,17 @@
 picture {
 	float: left;
-	margin-right: 58px;
+	text-align: center;
 
 	img {
 		height: auto;
-		max-width: 100%;
+		max-width: 50%;
+	}
+
+	@media (min-width: $tablet) {
+		margin-right: 58px;
+
+		img {
+			max-width: 100%;
+		}
 	}
 }

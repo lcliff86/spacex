@@ -7,33 +7,52 @@
 		clear: both;
 		margin-bottom: 8px;
 		min-height: 80px;
-		padding: 0 16px 0 34px;
+		padding: 0 16px;
 		width: 100%;
+
+		@media (min-width: $tablet) {
+			padding: 0 16px 0 34px;
+		}
 
 		.number,
 		.name {
-			line-height: 80px;
+			@media (min-width: $tablet) {
+				line-height: 78px;
+			}
 		}
 
 		.number {
-			display: inline-block;
-			font-size: 1.875rem;
+			display: block;
+			font-size: 1.1rem;
 			font-weight: bold;
-			width: 94px;
+			line-height: 50px;
+			width: 40px;
+
+			@media (min-width: $mobile) {
+				display: inline-block;
+			}
+
+			@media (min-width: $tablet) {
+				font-size: 1.875rem;
+				width: 94px;
+			}
 		}
 
 		.name {
-			font-size: 1.5rem;
+			font-size: 1.1rem;
 			font-weight: bold;
+
+			@media (min-width: $tablet) {
+				font-size: 1.5rem;
+			}
 		}
 
 		.details {
-			float: right;
-			text-align: right;
+			clear: both;
 
 			.date,
 			.rocket {
-				display: block;
+				display: inline-block;
 			}
 
 			.date {
@@ -43,8 +62,32 @@
 			}
 
 			.rocket {
+				float: right;
 				font-size: 1.1875rem;
 				font-weight: 900;
+				padding-top: 7px;
+			}
+
+			@media (min-width: $tablet) {
+				clear: none;
+				float: right;
+				text-align: right;
+
+				.date,
+				.rocket {
+					display: block;
+				}
+
+				.date {
+					font-size: 0.8125rem;
+					margin-bottom: 10px;
+					padding-top: 12px;
+				}
+
+				.rocket {
+					float: none;
+					padding-top: 0;
+				}
 			}
 		}
 	}
